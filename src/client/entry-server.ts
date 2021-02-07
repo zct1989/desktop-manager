@@ -1,7 +1,7 @@
-import { renderToString } from "@vue/server-renderer";
+import { renderToString } from '@vue/server-renderer';
 
 const createVueApp = () => {
-  return import("./main").then(({ createApp }) => createApp());
+  return import('./main').then(({ createApp }) => createApp('server'));
 };
 
 interface Manifest {
@@ -10,7 +10,7 @@ interface Manifest {
 
 export async function render(
   url: string,
-  manifest: Manifest
+  manifest: Manifest,
 ): Promise<[string, string]> {
   return renderVue(manifest);
 }
@@ -24,7 +24,7 @@ async function renderVue(manifest: Manifest): Promise<[string, string]> {
 }
 
 function renderPreloadLinks(modules: Set<string>, manifest: Manifest): string {
-  let links = "";
+  let links = '';
   const seen = new Set();
   modules.forEach((id) => {
     const files = manifest[id];
@@ -41,12 +41,12 @@ function renderPreloadLinks(modules: Set<string>, manifest: Manifest): string {
 }
 
 function renderPreloadLink(file: string): string {
-  if (file.endsWith(".js")) {
+  if (file.endsWith('.js')) {
     return `<link rel="modulepreload" crossorigin href="${file}">`;
-  } else if (file.endsWith(".css")) {
+  } else if (file.endsWith('.css')) {
     return `<link rel="stylesheet" href="${file}">`;
   } else {
     // TODO
-    return "";
+    return '';
   }
 }

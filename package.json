@@ -21,13 +21,18 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@icon-park/vue-next": "^1.2.6",
     "@nestjs/common": "^7.5.1",
     "@nestjs/core": "^7.5.1",
     "@nestjs/platform-express": "^7.5.1",
+    "less": "^4.1.1",
+    "pug": "^3.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
-    "vue": "3"
+    "vue": "3",
+    "vue-router": "4",
+    "vuex": "^4.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.1",
