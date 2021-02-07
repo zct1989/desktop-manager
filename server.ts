@@ -53,8 +53,7 @@ export async function createServer(
       }),
     );
   }
-
-  app.get('*', async (req, res, next) => {
+  app.get(/^(?!\/?(api|doc|graphql)).+$/, async (req, res, next) => {
     try {
       const { render } = isProd
         ? // @ts-ignore
