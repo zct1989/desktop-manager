@@ -1,6 +1,8 @@
 <template lang="pug">
-div.page-container
-  div.desktop-container
+.page-container
+  .systembar-container
+    system-bar
+  .desktop-container
     desktop
     application(
       v-for="app in applications"
@@ -13,23 +15,19 @@ div.page-container
 import { computed, defineComponent } from 'vue';
 import Desktop from './components/desktop.vue';
 import { useStore } from 'vuex';
-import { applicationsConfig } from '@/config/applications.config';
+import { ApplicationList, ApplicationState } from '@/config/application.config';
 import Application from '@/shared/components/application/application.vue';
+import SystemBar from './components/system-bar.vue';
 
 export default defineComponent({
   components: {
     Application,
     Desktop,
+    SystemBar,
   },
   setup() {
     const store = useStore();
-
-    const applications = computed(() => {
-      return store.state.applicationInstances.map((app) => {
-        const application = applicationsConfig.find((x) => x.name === app);
-        return application;
-      });
-    });
+    const applications = store.state.applicationInstances;
 
     return {
       applications,
@@ -39,6 +37,8 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .page-container {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -47,13 +47,14 @@ export default defineComponent({
   background-image: url('/wallpapers/wallpaper-01.png');
   background-size: 100% 100%;
 
-  .applications,
+  .systembar-container {
+    flex-basis: 40px;
+    position: relative;
+  }
+
   .desktop-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    flex: 1;
+    position: relative;
   }
 }
 </style>

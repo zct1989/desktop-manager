@@ -1,5 +1,5 @@
 <template lang="pug">
-div 
+.desktop
   div.application(
     v-for="app of applications" 
     :key="app.name"
@@ -12,19 +12,19 @@ div
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
-import { applicationsConfig } from '@/config/applications.config';
+import { ApplicationList } from '@/config/application.config';
 
 const applicationSetup = () => {
   const store = useStore();
+
   const applications = store.state.applications.map((app) => {
-    const application = applicationsConfig.find((x) => x.name === app);
+    const application = ApplicationList.find((x) => x.name === app);
     return application;
   });
 
   const onOpenApp = (app) => {
     store.commit('openApp', app);
   };
-  console.log(applications);
 
   return {
     applications,
@@ -51,6 +51,7 @@ export default defineComponent({
   align-items: center;
   border: solid 1px rgba(255, 255, 255, 0);
   border-radius: 5px;
+  user-select: none;
   .icon {
     width: 50px;
     height: 50px;
