@@ -2,22 +2,38 @@
 div.page-container
   div.desktop-container
     desktop
-  div.applications
-
+    application(
+      v-for="app in applications"
+      :key="app.name"
+      :app="app"
+    )
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import ApplicationContainer from '@/shared/components/application-container.vue';
+import { computed, defineComponent } from 'vue';
 import Desktop from './components/desktop.vue';
+import { useStore } from 'vuex';
+import { applicationsConfig } from '@/config/applications.config';
+import Application from '@/shared/components/application/application.vue';
 
 export default defineComponent({
   components: {
+    Application,
     Desktop,
-    ApplicationContainer,
   },
   setup() {
-    return {};
+    const store = useStore();
+
+    const applications = computed(() => {
+      return store.state.applicationInstances.map((app) => {
+        const application = applicationsConfig.find((x) => x.name === app);
+        return application;
+      });
+    });
+
+    return {
+      applications,
+    };
   },
 });
 </script>
@@ -30,5 +46,14 @@ export default defineComponent({
   left: 0;
   background-image: url('/wallpapers/wallpaper-01.png');
   background-size: 100% 100%;
+
+  .applications,
+  .desktop-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }
 </style>

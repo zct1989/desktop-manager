@@ -11,6 +11,9 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
+    "paths": {
+      "@/*": ["./src/client/*"]
+    }
   },
   "include": ["src/server/**/*.ts"]
 }

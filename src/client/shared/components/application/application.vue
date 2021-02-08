@@ -6,11 +6,14 @@
     @mousedown.prevent="onHeaderMouseDown"
   )
   
-  .application-body
+  application-body(
+    :app="app"
+  )
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, reactive } from 'vue';
+import ApplicationBody from './components/application-body.vue';
 
 /**
  *  位置相关
@@ -75,6 +78,14 @@ const dragSetup = (position) => {
 };
 
 export default defineComponent({
+  components: {
+    ApplicationBody,
+  },
+  props: {
+    app: {
+      required: true,
+    },
+  },
   setup() {
     const { position, style } = positionSetup();
 

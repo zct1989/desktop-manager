@@ -3,12 +3,13 @@ import { createStore } from 'vuex';
 export default createStore({
   state() {
     return {
-      applications: ["user-manage"],
+      applications: ['user-manage'],
+      applicationInstances: [],
     };
   },
   mutations: {
     openApp(state: any, app) {
-      state.applications.push(app);
+      state.applicationInstances.push(app);
     },
   },
 });
