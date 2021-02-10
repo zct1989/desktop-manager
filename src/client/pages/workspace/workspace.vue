@@ -18,6 +18,8 @@ import { useStore } from 'vuex';
 import { ApplicationList, ApplicationState } from '@/config/application.config';
 import Application from '@/shared/components/application/application.vue';
 import SystemBar from './components/system-bar.vue';
+import { getUserList } from '@/graphql/user.graph';
+import { useRequest } from '@/graphql';
 
 export default defineComponent({
   components: {
@@ -28,7 +30,10 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const applications = store.state.applicationInstances;
-
+    const request = useRequest();
+    request(getUserList).then((data) => {
+      console.log(data);
+    });
     return {
       applications,
     };
