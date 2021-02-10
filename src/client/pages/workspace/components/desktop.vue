@@ -9,37 +9,23 @@
     div.title {{app.title}}
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { defineComponent, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { ApplicationList } from '@/config/application.config';
 
-const applicationSetup = () => {
-  const store = useStore();
+const store = useStore();
 
-  const applications = store.state.applications.map((app) => {
-    const application = ApplicationList.find((x) => x.name === app);
-    return application;
-  });
-
-  const onOpenApp = (app) => {
-    store.commit('openApp', app);
-  };
-
-  return {
-    applications,
-    onOpenApp,
-  };
-};
-
-export default defineComponent({
-  components: {},
-  setup() {
-    return {
-      ...applicationSetup(),
-    };
-  },
+// 应用列表
+const applications = store.state.applications.map((app) => {
+  const application = ApplicationList.find((x) => x.name === app);
+  return application;
 });
+
+// 打开应用
+const onOpenApp = (app) => {
+  store.commit('openApp', app);
+};
 </script>
 
 <style lang="less" scoped>

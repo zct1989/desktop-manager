@@ -9,24 +9,19 @@
     .title {{app.title}}
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ApplicationList } from '@/config/application.config';
 import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 
-export default defineComponent({
-  setup() {
-    const store = useStore();
+const store = useStore();
 
-    const onActiveApp = (app) => {
-      store.commit('minimizeApp', app.id);
-    };
-
-    const applications = store.state.applicationInstances;
-
-    return { applications, onActiveApp };
-  },
-});
+// 应用列表
+const applications = store.state.applicationInstances;
+// 激活应用
+const onActiveApp = (app) => {
+  store.commit('minimizeApp', app.id);
+};
 </script>
 
 <style lang="less" scoped>

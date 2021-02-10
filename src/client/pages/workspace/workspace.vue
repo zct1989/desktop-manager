@@ -3,7 +3,7 @@
   .systembar-container
     system-bar
   .desktop-container
-    desktop
+    desktop(foo="123")
     application(
       v-for="app in applications"
       :key="app.name"
@@ -11,7 +11,7 @@
     )
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { computed, defineComponent } from 'vue';
 import Desktop from './components/desktop.vue';
 import { useStore } from 'vuex';
@@ -21,23 +21,15 @@ import SystemBar from './components/system-bar.vue';
 import { getUserList } from '@/graphql/user.graph';
 import { useRequest } from '@/graphql';
 
-export default defineComponent({
-  components: {
-    Application,
-    Desktop,
-    SystemBar,
-  },
-  setup() {
-    const store = useStore();
-    const applications = store.state.applicationInstances;
-    const request = useRequest();
-    request(getUserList).then((data) => {
-      console.log(data);
-    });
-    return {
-      applications,
-    };
-  },
+const store = useStore();
+
+// 用户列表
+const applications = store.state.applicationInstances;
+const request = useRequest();
+
+// 获取用户列表
+request(getUserList).then((data) => {
+  console.log(data);
 });
 </script>
 <style lang="less" scoped>

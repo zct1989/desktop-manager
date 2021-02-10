@@ -9,22 +9,11 @@
 
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { computed, defineComponent } from 'vue';
 import TaskBar from './task-bar.vue';
 import ToolBar from './tool-bar.vue';
 import AppMenuSvg from '@/assets/icons/svg/app.svg';
-
-export default defineComponent({
-  components: {
-    TaskBar,
-    ToolBar,
-    AppMenuSvg,
-  },
-  setup() {
-    return {};
-  },
-});
 </script>
 
 <style lang="less" scoped>
