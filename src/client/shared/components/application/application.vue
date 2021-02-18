@@ -45,6 +45,7 @@ const getParentSize = (ctx) => {
   };
 };
 
+// 获取屏幕尺寸
 const parentSize = getParentSize(getCurrentInstance());
 
 // #region 位置相关逻辑
@@ -84,6 +85,8 @@ store.commit('onMaximizeChange', {
       position.height = parentSize.height;
       position.left = 0;
       position.top = 0;
+
+      store.commit('activeApp', props.app.id);
     } else {
       const before = position.before as any;
       position.width = before.width;
@@ -112,13 +115,35 @@ const style = computed(() => {
 
 // #endregion
 
+// 计算默认位置
 const getDefaultPosition = () => {
   position.left = (parentSize.width - position.width) / 2;
   position.top = (parentSize.height - position.height) / 2;
 };
 
+const routes = [];
+const routerChangeListeners = [];
+
+const navigate = {
+  push({ component, props }) {
+    const route = { component, props };
+    routes.push(route);
+    routerChangeListeners.forEach((listener) => listener('push', route));
+  },
+  back() {
+    routerChangeListeners.forEach((listener) => listener('pop'));
+  },
+};
+
 provide('position', position);
 provide('app', props.app);
+// 应用路由监听
+provide('onRouterChange', (caller) => {
+  routerChangeListeners.push(caller);
+});
+
+// 导航操作
+provide('navigate', navigate);
 
 onMounted(() => {
   getDefaultPosition();

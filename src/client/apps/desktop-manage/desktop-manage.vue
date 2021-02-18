@@ -1,12 +1,22 @@
 <template lang="pug">
-div 123omponent 
+div 
+  button(@click="onEnter") test
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
+
 export default defineComponent({
   setup() {
-    return {};
+    const navigate = inject('navigate') as any;
+    const onEnter = () => {
+      navigate.push({
+        component: () => import('./pages/test-page-1.vue'),
+      });
+    };
+    return {
+      onEnter,
+    };
   },
 });
 </script>
