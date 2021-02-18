@@ -37,6 +37,11 @@ export default createStore({
     activeApp(state: any, id) {
       const index = Math.max(...state.applicationInstances.map((x) => x.index));
       const app = state.applicationInstances.find((x) => x.id === id);
+
+      if (app.minimize) {
+        app.minimize = !app.minimize;
+      }
+
       if (!app.active) {
         state.applicationInstances.forEach((x) => (x.active = false));
         app.index = index + 1;

@@ -20,7 +20,11 @@ const store = useStore();
 const applications = store.state.applicationInstances;
 // 激活应用
 const onActiveApp = (app) => {
-  store.commit('minimizeApp', app.id);
+  if (!app.minimize && app.active) {
+    store.commit('minimizeApp', app.id);
+  } else {
+    store.commit('activeApp', app.id);
+  }
 };
 </script>
 
