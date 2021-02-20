@@ -9,7 +9,10 @@
     "sourceMap": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "vite-svg-loader"],
-    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }]
+    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
+    "paths": {
+      "@/*": ["./src/client/*"]
+    }
   },
   "include": [
     "src/client/**/*.ts",

@@ -1,7 +1,7 @@
 import { renderToString } from '@vue/server-renderer';
 
 const createVueApp = () => {
-  return import('./main').then(({ createApp }) => createApp('server'));
+  return import('./main').then(({ createApp }) => createApp());
 };
 
 interface Manifest {
