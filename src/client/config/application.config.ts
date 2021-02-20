@@ -4,10 +4,11 @@ export const ApplicationList = [
     icon: '/icons/user.png',
     title: '用户管理',
     root: () => import('@/apps/user-manage/user-manage.vue'),
+    maximize: true,
   },
   {
     name: 'desktop-manage',
-    icon: '/icons/desktop.png',
+    icon: '/icons/appstore.png',
     title: '桌面管理',
     root: () => import('@/apps/desktop-manage/desktop-manage.vue'),
   },

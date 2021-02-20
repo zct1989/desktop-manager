@@ -31,6 +31,7 @@ const onOpenApp = (app) => {
 <style lang="less" scoped>
 .application {
   margin: 20px;
+  padding: 5px;
   width: 80px;
   display: flex;
   flex-direction: column;
@@ -39,21 +40,20 @@ const onOpenApp = (app) => {
   border-radius: 5px;
   user-select: none;
   .icon {
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
+    width: 60px;
+    height: 60px;
     border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px;
+    margin: 5px 10px;
     img {
-      width: 80%;
-      height: 80%;
+      padding: 5px;
     }
   }
   .title {
     font-size: 14px;
+    color: #fff;
   }
 
   &:hover {

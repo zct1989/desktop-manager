@@ -7,13 +7,16 @@ export default createStore({
     return {
       applications: ['user-manage', 'desktop-manage'],
       applicationInstances: [],
+      user: {},
     };
   },
   mutations: {
     openApp(state: any, name) {
       const target = ApplicationList.find((x) => x.name === name);
-      const index =
-        Math.max(state.applicationInstances.map((x) => x.index)) || 0;
+      const index = Math.max(
+        ...state.applicationInstances.map((x) => x.index),
+        0,
+      );
       // 创建应用对象
       const application = {
         name: name,

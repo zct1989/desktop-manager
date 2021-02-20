@@ -41,8 +41,9 @@ request(getUserList).then((data) => {
   bottom: 0;
   right: 0;
   left: 0;
-  background-image: url('/wallpapers/wallpaper-01.png');
+  background-image: url('/wallpapers/wallpaper-01.jpg');
   background-size: 100% 100%;
+  overflow: hidden;
 
   .systembar-container {
     flex-basis: 40px;

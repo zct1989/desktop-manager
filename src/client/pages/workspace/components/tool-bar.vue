@@ -1,5 +1,5 @@
 <template lang="pug">
-.tool-bar
+.tool-bar.flex.align-center
 </template>
 
 <script setup lang="ts"></script>

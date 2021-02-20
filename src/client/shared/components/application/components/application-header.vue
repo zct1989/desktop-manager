@@ -1,11 +1,12 @@
 <template lang="pug">
-.application-header(
+.application-header.flex.items-center(
     @mousedown.prevent="onHeaderMouseDown"
+    @dblclick="onMax"
 )
-  .info-container
+  .info-container.flex
     .icon: img(:src="app.icon")
     .title {{app.title}}
-  .tool-container
+  .tool-container.flex.flex-row
     MinSvg.icon(@click.stop.prevent="onMin")
     MaxSvg.icon(@click.stop.pervent="onMax")
     CloseSvg.icon(@click.stop.prevent="onClose")
@@ -100,8 +101,8 @@ export default defineComponent({
   bottom: 0;
   left: 0;
   right: 0;
-  display: flex;
-  align-items: center;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+  user-select: none;
 
   .info-container {
     flex: 1;
@@ -109,24 +110,22 @@ export default defineComponent({
     align-items: center;
 
     .icon {
-      img {
-        padding: 0 10px;
-        width: 16px;
-        height: 16px;
-      }
+      width: 20px;
+      height: 20px;
+      margin: 0 10px;
     }
     .title {
       font-size: 12px;
       flex: 1;
-      text-align: center;
       user-select: none;
     }
   }
   .tool-container {
+    padding-right: 3px;
     .icon {
-      padding: 0 5px;
-      width: 18px;
-      height: 18px;
+      margin: 0 4px;
+      width: 15px;
+      height: 15px;
       border: solid 1px transparent;
 
       &:hover {

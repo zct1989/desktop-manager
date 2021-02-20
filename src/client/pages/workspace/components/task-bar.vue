@@ -1,12 +1,12 @@
 <template lang="pug">
 .task-bar
-  .application(
+  .application.flex.justify-center.justify-items-center(
     v-for="app in applications"
     :key="app.name"
+    :class="{active:app.active}"
     @click="onActiveApp(app)"
   )
     .icon: img(:src="app.icon")
-    .title {{app.title}}
 </template>
 
 <script setup lang="ts">
@@ -42,24 +42,29 @@ const onActiveApp = (app) => {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #fff;
-  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
   height: 90%;
-  padding: 0 20px 0 10px;
-  margin: 0 5px;
+  padding: 0 10px;
+  margin: 0 3px;
   cursor: pointer;
 
   .icon {
-    width: 25px;
-    height: 25px;
-    img {
-      width: 80%;
-      height: 80%;
-    }
+    width: 28px;
+    height: 28px;
   }
 
-  .title {
-    font-size: 14px;
+  &.active {
+    &::before {
+      display: block;
+      position: absolute;
+      top: 0px;
+      width: 20px;
+      height: 2px;
+      background: #fff;
+      border-radius: 5px;
+      content: '';
+    }
   }
 
   &:hover {

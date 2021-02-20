@@ -18,7 +18,7 @@ import AppMenuSvg from '@/assets/icons/svg/app.svg';
 
 <style lang="less" scoped>
 .system-bar {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
   position: absolute;
   left: 0;
   top: 0;
@@ -31,7 +31,7 @@ import AppMenuSvg from '@/assets/icons/svg/app.svg';
     .icon {
       height: 30px;
       width: 30px;
-      padding: 0 10px;
+      margin: 0 10px;
       fill: rgba(255, 255, 255, 0.9);
     }
   }
