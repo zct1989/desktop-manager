@@ -7,6 +7,8 @@
     @mousedown.prevent="onDragStart('left',$event)")
 .application-resize-bar.right-bar(
     @mousedown.prevent="onDragStart('right',$event)")
+.application-resize-bar.right-bottom-bar(
+    @mousedown.prevent="onDragStart('right-bottom',$event)")
 .application-resize-border(
   :style="position"
   v-if="dragging"
@@ -45,6 +47,18 @@ const updatePosition = () => {
     case 'right':
       windowPosition.width -= position.value.right;
       break;
+    case 'right-bottom':
+      windowPosition.width -= position.value.right;
+      windowPosition.height -= position.value.bottom;
+  }
+
+  if (windowPosition.width < windowPosition.minWidth) {
+    windowPosition.width = windowPosition.minWidth;
+  }
+
+  if (windowPosition.height < windowPosition.minHeight) {
+    console.log('123');
+    windowPosition.height = windowPosition.minHeight;
   }
 };
 
@@ -68,6 +82,10 @@ const onDragMove = (e) => {
       break;
     case 'right':
       position.value.right += x;
+      break;
+    case 'right-bottom':
+      position.value.right += x;
+      position.value.bottom += y;
       break;
   }
   // position.value.top -= top;
@@ -128,6 +146,13 @@ const onDragStart = (direction, e) => {
     width:border-size
     height:100%
     cursor:e-resize;
+
+  &.right-bottom-bar
+    right:0
+    bottom:0
+    width:border-size
+    height:border-size
+    cursor:se-resize
 
 .application-resize-border
   border:dotted 2px #000;

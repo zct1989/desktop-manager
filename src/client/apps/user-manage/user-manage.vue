@@ -1,12 +1,5 @@
 <template lang="pug">
-div 123123123Component 
+div user manage test
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    return {};
-  },
-});
-</script>
+<script setup lang="ts"></script>

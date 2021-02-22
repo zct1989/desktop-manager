@@ -7,7 +7,11 @@ import createPersistedState from 'vuex-persistedstate';
 const plugins = [];
 
 if (!import.meta.env.SSR) {
-  plugins.push(createPersistedState());
+  plugins.push(
+    createPersistedState({
+      paths: ['user'],
+    }),
+  );
 }
 
 const store = createStore({

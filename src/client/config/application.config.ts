@@ -13,9 +13,3 @@ export const ApplicationList = [
     root: () => import('@/apps/desktop-manage/desktop-manage.vue'),
   },
 ];
-
-export enum ApplicationState {
-  NORMAL,
-  MAX,
-  MIN,
-}

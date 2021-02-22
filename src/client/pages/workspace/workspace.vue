@@ -15,7 +15,7 @@
 import { computed, defineComponent } from 'vue';
 import Desktop from './components/desktop.vue';
 import { useStore } from 'vuex';
-import { ApplicationList, ApplicationState } from '@/config/application.config';
+import { ApplicationList } from '@/config/application.config';
 import Application from '@/shared/components/application/application.vue';
 import SystemBar from './components/system-bar.vue';
 import { getUserList } from '@/graphql/user.graph';

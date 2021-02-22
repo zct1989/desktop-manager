@@ -45,12 +45,14 @@ const position = reactive({
   left: 0,
   width: 400,
   height: 400,
+  minWidth: 400,
+  minHeight: 400,
   index: props.app.index,
   before: {},
 });
 
 // 屏幕尺寸
-const parentSize = getParentSize(getCurrentInstance());
+const parentSize = { width: 0, height: 0 };
 
 // 应用路由
 const routes = [];
@@ -75,6 +77,10 @@ function getParentSize(ctx) {
 
 // 计算默认位置
 function getDefaultPosition() {
+  const { width, height } = getParentSize(getCurrentInstance());
+  parentSize.width = width;
+  parentSize.height = height;
+
   position.left = (parentSize.width - position.width) / 2;
   position.top = (parentSize.height - position.height) / 2;
 }
@@ -172,6 +178,7 @@ provide('onRouterChange', (caller) => {
 provide('navigate', navigate);
 
 onMounted(() => {
+  // 获取默认位置
   getDefaultPosition();
 });
 // #endregion
