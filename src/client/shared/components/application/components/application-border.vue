@@ -57,7 +57,6 @@ const updatePosition = () => {
   }
 
   if (windowPosition.height < windowPosition.minHeight) {
-    console.log('123');
     windowPosition.height = windowPosition.minHeight;
   }
 };
