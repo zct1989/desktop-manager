@@ -1,17 +1,23 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "noImplicitAny": false,
-    "allowSyntheticDefaultImports": true,
-    "target": "es2017",
+    "baseUrl": ".",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client", "vite-svg-loader"],
+    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
+    "paths": {
+      "@/*": ["./src/client/*"]
+    }
   },
-  "include": ["src/server/**/*.ts"]
+  "include": [
+    "src/client/**/*.ts",
+    "src/client/**/*.d.ts",
+    "src/client/**/*.tsx",
+    "src/client/**/*.vue"
+  ]
 }
