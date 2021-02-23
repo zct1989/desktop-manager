@@ -15,8 +15,8 @@ import { UserResolver } from './graphql/resolvers/user.resolver';
     }),
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      host: '127.0.0.1',
-      port: 27017,
+      host: '139.155.204.121',
+      port: 32717,
       database: 'default',
       username: 'admin',
       password: '123456',

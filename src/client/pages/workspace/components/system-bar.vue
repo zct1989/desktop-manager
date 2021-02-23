@@ -1,19 +1,35 @@
 <template lang="pug">
 .system-bar
   .menu
-    AppMenuSvg.icon
+    AppMenuSvg.icon(@click="onOpen")
   .taskbar-container
     task-bar
   .tool-container
     tool-bar
-
+teleport(to="body")
+  transition(name="application-center-fade")
+    .application-center.absolute.inset-0(v-if="visible")
+      application-center.h-full.w-full
 </template>
 
 <script setup lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, inject, provide, ref } from 'vue';
 import TaskBar from './task-bar.vue';
 import ToolBar from './tool-bar.vue';
 import AppMenuSvg from '@/assets/icons/svg/app.svg';
+import ApplicationCenter from '@/components/application-center.vue';
+
+const visible = ref(false);
+
+provide('close:application-center', onClose);
+
+function onOpen() {
+  visible.value = true;
+}
+
+function onClose() {
+  visible.value = false;
+}
 </script>
 
 <style lang="less" scoped>
@@ -41,5 +57,25 @@ import AppMenuSvg from '@/assets/icons/svg/app.svg';
     position: relative;
     height: 100%;
   }
+}
+
+.application-center {
+  .background {
+    filter: blur(40px);
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+</style>
+
+<style lang="stylus">
+.application-center-fade-enter-active,
+.application-center-fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+.application-center-fade-enter-from,
+.application-center-fade-leave-to {
+  opacity: 0;
+  transform:scale(0.8)
 }
 </style>

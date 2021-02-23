@@ -7,5 +7,8 @@ export default {
     updateUser(state, user) {
       state.current = user;
     },
+    logout(state) {
+      state.current = {};
+    },
   },
 };
