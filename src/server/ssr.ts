@@ -28,7 +28,7 @@ export async function createServer(
     // during dev, inject vite client + always read fresh index.html
     return (
       `<script type="module" src="/@vite/client"></script>` +
-      fs.readFileSync(toAbsolute('../index.html'), 'utf-8')
+      fs.readFileSync(toAbsolute('../../index.html'), 'utf-8')
     );
   }
 
