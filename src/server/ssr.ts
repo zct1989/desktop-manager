@@ -2,21 +2,22 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const isTest = process.env.NODE_ENV === 'test' || !!process.env.VITE_TEST_BUILD;
+const prodPath = '../../dist/client';
 
 export async function createServer(
   app: any,
   root = process.cwd(),
   isProd = process.env.NODE_ENV === 'production',
 ) {
-  const toAbsolute = (p) => path.resolve(__dirname, p);
+  const toAbsolute = (...p) => path.resolve(__dirname, ...p);
 
   const indexProd = isProd
-    ? fs.readFileSync(toAbsolute('dist/client/index.html'), 'utf-8')
+    ? fs.readFileSync(toAbsolute(prodPath, 'index.html'), 'utf-8')
     : '';
 
   const manifest = isProd
     ? // @ts-ignore
-      require('./dist/client/ssr-manifest.json')
+      require('../../dist/client/ssr-manifest.json')
     : {};
 
   function getIndexTemplate(url) {
@@ -48,7 +49,7 @@ export async function createServer(
   } else {
     app.use(require('compression')());
     app.use(
-      require('serve-static')(toAbsolute('dist/client'), {
+      require('serve-static')(toAbsolute(prodPath), {
         index: false,
       }),
     );
@@ -57,7 +58,7 @@ export async function createServer(
     try {
       const { render } = isProd
         ? // @ts-ignore
-          require('./dist/server/entry-server.js')
+          require('../../dist/client/render/entry-server.js')
         : await vite.ssrLoadModule('/src/client/entry-server.ts');
 
       const [appHtml, preloadLinks] = await render(req.originalUrl, manifest);

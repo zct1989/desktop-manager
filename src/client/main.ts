@@ -4,7 +4,7 @@ import { createGraphQL } from './graphql';
 import store from '@/store';
 import router from '@/router';
 
-export function createApp(type) {
+export function createApp() {
   const app = createSSRApp(App);
   const graphQL = createGraphQL();
 

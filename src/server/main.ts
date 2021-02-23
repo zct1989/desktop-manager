@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { createServer } from '../../server';
+import { createServer } from './ssr';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import * as Express from 'express';
 
