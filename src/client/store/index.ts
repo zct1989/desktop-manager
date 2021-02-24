@@ -4,7 +4,7 @@ import mutations from './mutations';
 import modules from './modules';
 import createPersistedState from 'vuex-persistedstate';
 
-const plugins = [];
+const plugins: any[] = [];
 
 if (!import.meta.env.SSR) {
   plugins.push(
