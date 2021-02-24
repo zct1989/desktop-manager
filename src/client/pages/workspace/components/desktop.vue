@@ -1,5 +1,5 @@
 <template lang="pug">
-.desktop(ref="desktop")
+.desktop
   .application(
     v-for="app of applications" 
     :key="app.name"

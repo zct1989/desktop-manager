@@ -6,32 +6,20 @@ import {
 } from 'vue-router';
 
 import store from '@/store';
+import launch from '@/bootstrap/launch';
+import { routes } from './routes';
 
 const canUserAccess = () => {
   const result = !!store.state.user.current.username;
   return result;
 };
 
-const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    redirect: '/workspace',
-  },
-  {
-    name: 'login',
-    path: '/login',
-    component: () => import('@/pages/login/login.vue'),
-  },
-  {
-    name: 'worksapce',
-    path: '/workspace',
-    component: () => import('@/pages/workspace/workspace.vue'),
-    beforeEnter: async () => {
-      const canAccess = await canUserAccess();
-      if (!canAccess) return '/login';
-    },
-  },
-];
+const canReadyAccess = async () => {
+  const ready = !!store.state.ready;
+  if (!ready) {
+    return await launch();
+  }
+};
 
 const routerHistory = import.meta.env.SSR
   ? createMemoryHistory()
@@ -41,5 +29,8 @@ const router = createRouter({
   history: routerHistory,
   routes,
 });
+
+// 系统初始化
+router.beforeEach(canReadyAccess);
 
 export default router;

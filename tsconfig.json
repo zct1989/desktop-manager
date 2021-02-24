@@ -11,6 +11,10 @@
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "vite-svg-loader"],
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": ["./src/client/*"]
     }
@@ -19,6 +23,7 @@
     "src/client/**/*.ts",
     "src/client/**/*.d.ts",
     "src/client/**/*.tsx",
-    "src/client/**/*.vue"
+    "src/client/**/*.vue",
+    "src/server/**/*.ts"
   ]
 }

@@ -16,3 +16,22 @@ export const getUserList = gql`
   }
   ${userFragment}
 `;
+
+export const getRootUser = gql`
+  query Root {
+    root {
+      ...user
+    }
+  }
+  ${userFragment}
+`;
+
+export const createRootUser = gql`
+  mutation creater($password: String!) {
+    createRootUser(password: $password) {
+      ...user
+    }
+  }
+
+  ${userFragment}
+`;

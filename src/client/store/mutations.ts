@@ -1,6 +1,9 @@
 import { ApplicationList } from '@/config/application.config';
 
 export default {
+  ready(state) {
+    state.ready = true;
+  },
   // 打开应用
   openApp(state: any, name) {
     const target = ApplicationList.find((x) => x.name === name);
@@ -8,6 +11,10 @@ export default {
       ...state.applicationInstances.map((x) => x.index),
       0,
     );
+
+    if (!target) {
+      return;
+    }
     // 创建应用对象
     const application = {
       name: name,

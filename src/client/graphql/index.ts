@@ -3,12 +3,12 @@ import { inject } from 'vue';
 
 const endpoint = '/graphql';
 const DefaultGraphQLClient = 'DefaultGraphQLClient ';
+const GraphQLClientInstance = new GraphQLClient(endpoint, {});
 
 export const createGraphQL = () => {
-  const graphQLClient = new GraphQLClient(endpoint, {});
   return {
     install: (app, options) => {
-      app.provide(DefaultGraphQLClient, graphQLClient);
+      app.provide(DefaultGraphQLClient, GraphQLClientInstance);
     },
   };
 };
@@ -16,4 +16,8 @@ export const createGraphQL = () => {
 export const useRequest = () => {
   const graphQLClient = inject(DefaultGraphQLClient) as GraphQLClient;
   return graphQLClient.request.bind(graphQLClient);
+};
+
+export const createRequest = () => {
+  return GraphQLClientInstance.request.bind(GraphQLClientInstance);
 };

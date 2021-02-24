@@ -6,4 +6,9 @@ type User {
 
 type Query {
   users: [User]
+  root: User
+}
+
+type Mutation {
+  createRootUser(password: String): User
 }
