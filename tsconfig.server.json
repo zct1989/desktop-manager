@@ -11,7 +11,10 @@
     "sourceMap": true,
     "outDir": "./dist/server",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@/*": ["./src/client/*"]
+    }
   },
   "include": ["src/server/**/*.ts"]
 }

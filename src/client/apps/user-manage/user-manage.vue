@@ -1,5 +1,5 @@
 <template lang="pug">
-div user manage test
+div  TEST FOR PAGE
 </template>
 
 <script setup lang="ts"></script>

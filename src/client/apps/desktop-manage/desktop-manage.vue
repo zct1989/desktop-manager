@@ -1,22 +1,15 @@
 <template lang="pug">
-div 
-  button(@click="onEnter") test
+a-button.m-10(type="primary" @click="onEnter") 应用内跳转测试
 </template>
 
-<script lang="ts">
-import { defineComponent, inject } from 'vue';
+<script setup lang="ts">
+import { inject } from 'vue';
 
-export default defineComponent({
-  setup() {
-    const navigate = inject('navigate') as any;
-    const onEnter = () => {
-      navigate.push({
-        component: () => import('./pages/test-page-1.vue'),
-      });
-    };
-    return {
-      onEnter,
-    };
-  },
-});
+const navigate = inject('navigate') as any;
+
+const onEnter = () => {
+  navigate.push({
+    component: () => import('./pages/test-page-1.vue'),
+  });
+};
 </script>

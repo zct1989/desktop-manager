@@ -1,7 +1,7 @@
 <template lang="pug">
 .application-center.p-20(@click.self="close")
   .application-search-wrapper.flex.justify-center(@click.self="close")
-    a-input.application-search(@change.preserve="onSearchInput")
+    a-input.application-search(ref="search" @change.preserve="onSearchInput")
   .application-list.flex.py-10(@click.self="close")
     .application.mx-10(
       v-for="app of applications" 
@@ -24,6 +24,7 @@ const store = useStore();
 const subject = new Subject<string>();
 const searchText = ref('');
 const close = inject('close:application-center') as any;
+const search = ref();
 
 // 应用列表
 const applications = computed(() => {
@@ -52,6 +53,8 @@ function onEsc(e) {
 }
 
 onMounted(() => {
+  const searchInput = search.value as any;
+  searchInput.focus();
   document.addEventListener('keyup', onEsc);
 });
 
