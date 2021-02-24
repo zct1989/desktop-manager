@@ -1,8 +1,8 @@
 <template lang="pug">
 .application-center.p-20(@click.self="close")
-  .application-search-wrapper.flex.justify-center
+  .application-search-wrapper.flex.justify-center(@click.self="close")
     a-input.application-search(@change.preserve="onSearchInput")
-  .application-list.flex.py-10
+  .application-list.flex.py-10(@click.self="close")
     .application.mx-10(
       v-for="app of applications" 
       :key="app.name"
@@ -18,7 +18,7 @@ import { useStore } from 'vuex';
 import { ApplicationList } from '@/config/application.config';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { computed, inject, ref } from 'vue';
+import { computed, inject, onMounted, onUnmounted, ref } from 'vue';
 
 const store = useStore();
 const subject = new Subject<string>();
@@ -45,6 +45,18 @@ function onSearchInput({ target: { value } }) {
 
 subject.pipe(debounceTime(100)).subscribe((name) => {
   searchText.value = name;
+});
+
+function onEsc(e) {
+  if (e.keyCode == 27) close();
+}
+
+onMounted(() => {
+  document.addEventListener('keyup', onEsc);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('keyup', onEsc);
 });
 </script>
 

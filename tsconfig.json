@@ -7,6 +7,7 @@
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
+    "noImplicitAny": false,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "vite-svg-loader"],
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],

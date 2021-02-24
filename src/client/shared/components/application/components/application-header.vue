@@ -66,6 +66,8 @@ const dragSetup = () => {
 
   // 开始拖动监听
   const onDragStart = (e) => {
+    if (app.maximize) return;
+
     posX = e.clientX;
     posY = e.clientY;
 

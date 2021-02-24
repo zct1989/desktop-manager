@@ -37,7 +37,7 @@ export default defineComponent({
     const app = inject('app') as any;
     const onRouterChange = inject('onRouterChange') as any;
 
-    const routes = shallowRef([]);
+    const routes = shallowRef<any>([]);
 
     // 加载组件
     const loadComponent = (component) => {

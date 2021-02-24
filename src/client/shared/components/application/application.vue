@@ -114,8 +114,8 @@ store.commit('onMaximizeChange', {
         height: position.height,
       };
 
-      position.width = parentSize.width;
-      position.height = parentSize.height;
+      position.width = '100%';
+      position.height = '100%';
       position.left = 0;
       position.top = 0;
 
@@ -133,10 +133,10 @@ store.commit('onMaximizeChange', {
 // 生成样式
 const style = computed(() => {
   const target = {
-    top: `${position.top}px`,
-    left: `${position.left}px`,
-    height: `${position.height}px`,
-    width: `${position.width}px`,
+    top: position.top,
+    left: position.left,
+    height: position.height,
+    width: position.width,
     zIndex: props.app.index,
   } as any;
 

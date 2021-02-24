@@ -45,10 +45,18 @@ function onClose() {
 
   .menu {
     .icon {
-      height: 30px;
-      width: 30px;
-      margin: 0 10px;
+      height: 25px;
+      width: 25px;
+      margin: 0 15px;
       fill: rgba(255, 255, 255, 0.9);
+
+      &:hover {
+        fill: rgba(255, 255, 255, 0.7);
+      }
+
+      &:active {
+        fill: rgba(255, 255, 255, 0.5);
+      }
     }
   }
 
