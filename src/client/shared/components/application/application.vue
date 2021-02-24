@@ -65,6 +65,7 @@ const routerChangeListeners = [];
 
 // 获取屏幕尺寸
 function getParentSize(ctx) {
+  console.log(ctx);
   const parent = ctx.parent as any;
   const height = parent.ctx.$el.clientHeight;
   const width = parent.ctx.$el.clientWidth;

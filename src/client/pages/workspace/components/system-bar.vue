@@ -68,10 +68,7 @@ function onClose() {
 }
 
 .application-center {
-  .background {
-    filter: blur(40px);
-    background: rgba(0, 0, 0, 0.5);
-  }
+  z-index: 100;
 }
 </style>
 
