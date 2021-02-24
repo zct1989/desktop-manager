@@ -1,6 +1,6 @@
 <template lang="pug">
-.desktop
-  div.application(
+.desktop(ref="desktop")
+  .application(
     v-for="app of applications" 
     :key="app.name"
     @dblclick="onOpenApp(app.name)"
@@ -10,7 +10,14 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, onMounted } from 'vue';
+import {
+  defineComponent,
+  getCurrentInstance,
+  inject,
+  onMounted,
+  provide,
+  ref,
+} from 'vue';
 import { useStore } from 'vuex';
 import { ApplicationList } from '@/config/application.config';
 

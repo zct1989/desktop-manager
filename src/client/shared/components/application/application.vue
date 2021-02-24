@@ -38,6 +38,9 @@ const props = defineProps({
   },
 });
 
+const screenHeight = inject('screenHeight') as any;
+const screenWidth = inject('screenWidth') as any;
+
 // #region Variable
 // 位置数据
 const position = reactive({
@@ -62,28 +65,10 @@ const routerChangeListeners = [];
 // #endregion
 
 //#region Function
-
-// 获取屏幕尺寸
-function getParentSize(ctx) {
-  console.log(ctx);
-  const parent = ctx.parent as any;
-  const height = parent.ctx.$el.clientHeight;
-  const width = parent.ctx.$el.clientWidth;
-
-  return {
-    width,
-    height,
-  };
-}
-
 // 计算默认位置
 function getDefaultPosition() {
-  const { width, height } = getParentSize(getCurrentInstance());
-  parentSize.width = width;
-  parentSize.height = height;
-
-  position.left = (parentSize.width - position.width) / 2;
-  position.top = (parentSize.height - position.height) / 2;
+  position.left = (screenWidth.value - position.width) / 2;
+  position.top = (screenHeight.value - position.height) / 2;
 }
 
 // 激活窗口

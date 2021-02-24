@@ -2,8 +2,8 @@
 .page-container
   .systembar-container
     system-bar
-  .desktop-container
-    desktop(foo="123")
+  .desktop-container(ref="desktopContainer")
+    desktop
     application(
       v-for="app in applications"
       :key="app.name"
@@ -12,24 +12,29 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, onMounted, provide, ref } from 'vue';
 import Desktop from './components/desktop.vue';
 import { useStore } from 'vuex';
 import { ApplicationList } from '@/config/application.config';
 import Application from '@/shared/components/application/application.vue';
 import SystemBar from './components/system-bar.vue';
-import { getUserList } from '@/graphql/user.graph';
-import { useRequest } from '@/graphql';
 
 const store = useStore();
 
 // 用户列表
 const applications = store.state.applicationInstances;
-const request = useRequest();
 
-// 获取用户列表
-request(getUserList).then((data) => {
-  console.log(data);
+const desktopContainer = ref<any>();
+
+const screenWidth = ref(0);
+const screenHeight = ref(0);
+
+provide('screenWidth', screenWidth);
+provide('screenHeight', screenHeight);
+
+onMounted(() => {
+  screenWidth.value = desktopContainer.value.clientWidth;
+  screenHeight.value = desktopContainer.value.clientHeight;
 });
 </script>
 <style lang="less" scoped>
