@@ -29,14 +29,19 @@ import { reactive, ref, toRaw } from 'vue';
 import { useRouter } from 'vue-router';
 import { ArrowRightOutlined } from '@ant-design/icons-vue';
 import { useStore } from 'vuex';
+import { useRequest } from '@/graphql';
+import { userLogin } from '@/graphql/user.graph';
+import { message } from 'ant-design-vue';
+
+const request = useRequest();
 
 const router = useRouter();
 const store = useStore();
 
 // #region Variable
 const loginModel = reactive({
-  username: 'admin',
-  password: '123456',
+  username: '',
+  password: '',
 });
 
 const loginRules = {
@@ -48,13 +53,21 @@ const loginRules = {
 // #region Function
 // 用户登陆
 function onSubmit() {
-  const { username } = toRaw(loginModel);
+  const { username, password } = toRaw(loginModel);
 
-  store.commit('user/updateUser', {
+  const loginRequest = request(userLogin, {
     username,
+    password,
   });
 
-  router.push({ path: '/' });
+  loginRequest
+    .then(({ login: user }) => {
+      store.commit('user/updateUser', user);
+      router.push({ path: '/' });
+    })
+    .catch(() => {
+      message.error('用户名或密码错误');
+    });
 }
 
 // #endregion

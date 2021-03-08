@@ -11,6 +11,13 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
+  public async login({ username, password }) {
+    return await this.userRepository.findOne({
+      username,
+      password,
+    });
+  }
+
   public async findAll() {
     return await this.userRepository.find();
   }
